@@ -1,1 +1,13 @@
-/* No CSS *//*# sourceMappingURL=main.css.map */
+body {
+  color: #ffffff;
+  background: #151515;
+}
+
+.times-new-roman {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.roboto {
+  font-family: Roboto;
+}
+/*# sourceMappingURL=main.css.map */
