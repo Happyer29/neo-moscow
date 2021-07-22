@@ -1,0 +1,60 @@
+{
+  "name": "neo-moscow",
+  "version": "0.0.1",
+  "description": "thx https://stackoverflow.com/questions/35903246/how-to-create-multiple-output-paths-in-webpack-config\r https://github.com/webpack/webpack/issues/1189",
+  "main": "./build/bundle.js",
+  "scripts": {
+    "start": "npm-run-all --parallel lint:watch test:watch build",
+    "start:prod": "npm-run-all --parallel lint test build:prod",
+    "clean-dist": "rimraf ./dist && mkdir dist",
+    "clean-build": "rimraf ./build && mkdir build",
+    "clean": "npm-run-all clean-dist clean-build",
+    "test": "mocha ./app/**/*.test.js --compilers js:babel-core/register",
+    "test:watch": "npm run test -- --watch",
+    "lint": "esw ./app/**/*.js",
+    "lint:watch": "npm run lint -- --watch",
+    "server": "nodemon server.js",
+    "server:prod": "cross-env NODE_ENV=production nodemon server.js",
+    "build-html": "node tools/buildHtml.js",
+    "build-html:prod": "cross-env NODE_ENV=production node tools/buildHtml.js",
+    "prebuild": "npm-run-all clean-dist build-html",
+    "build": "webpack",
+    "postbuild": "npm run server",
+    "prebuild:prod": "npm-run-all clean-build build-html:prod",
+    "build:prod": "cross-env NODE_ENV=production webpack",
+    "postbuild:prod": "npm run server:prod"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "etc": "^1.1.1",
+    "file-loader": "^6.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^6.2.0",
+    "eslint": "^7.31.0",
+    "image-minimizer-webpack-plugin": "^2.2.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "mini-css-extract-plugin": "^2.1.0",
+    "mocha": "^9.0.2",
+    "node-sass": "^6.0.1",
+    "nodemon": "^2.0.12",
+    "npm-run-all": "^4.1.5",
+    "sass-loader": "^12.1.0",
+    "webpack": "^5.46.0",
+    "webpack-cli": "^4.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Happyer29/neo-moscow.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Happyer29/neo-moscow/issues"
+  },
+  "homepage": "https://github.com/Happyer29/neo-moscow#readme"
+}
