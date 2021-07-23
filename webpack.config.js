@@ -1,6 +1,6 @@
 const path = require("path");
 const miniCss = require("mini-css-extract-plugin");
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -33,11 +33,9 @@ module.exports = {
         test: /\.(s*)css$/,
         use: [miniCss.loader, "css-loader", "sass-loader"],
       },
-
-      //img optimization
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        type: "asset",
+        test: /\.pug$/,
+        use: ["pug-loader"],
       },
     ],
   },
@@ -45,14 +43,8 @@ module.exports = {
     new miniCss({
       filename: "./build/styles/style.css",
     }),
-    new ImageMinimizerPlugin({
-      severityError: "warning", // Ignore errors on corrupted images
-      minimizerOptions: {
-        plugins: ["gifsicle"],
-      },
-      // Disable `loader`
-      loader: false,
-      filename: "test.png"
+    new HtmlWebpackPlugin({
+      template: "./tools/index.pug",
     }),
   ],
 
